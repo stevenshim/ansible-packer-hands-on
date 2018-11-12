@@ -24,8 +24,6 @@
   notify:
   - restart apache webserver
 
-- meta: flush_handlers
-
 - name: change apache default listening port configuration
   lineinfile:
     dest: /etc/httpd/conf/httpd.conf

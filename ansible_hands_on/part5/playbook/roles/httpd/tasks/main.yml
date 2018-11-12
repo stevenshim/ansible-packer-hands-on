@@ -1,0 +1,6 @@
+---
+- name: install httpd with yum
+  yum: name={{ item.package }}
+  loop:
+  - { package: httpd }
+  - { package: mod_ssl }

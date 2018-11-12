@@ -1,0 +1,8 @@
+<VirtualHost *:{{ http_port }}>
+
+  DocumentRoot /data/web/{{ service }}/docroot
+
+  ErrorLog       /log/apache/{{ service }}/{{ service }}.error_log
+  CustomLog      /log/apache/{{ service }}/{{ service }}.access_log common
+
+</VirtualHost>

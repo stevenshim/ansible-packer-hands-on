@@ -1,0 +1,9 @@
+{
+  "aws_vpc_id": "vpc-c10536a9",
+  "aws_subnet_id": "subnet-65a6910d",
+  "security_group_id": "sg-0b26500a049ce59cb",
+  "aws_source_ami": "ami-0a10b2721688ce9d2",
+  "aws_target_ami": "my-first-ami",
+  "service": "awskrug",
+  "ec2-name": "now-baking"
+}

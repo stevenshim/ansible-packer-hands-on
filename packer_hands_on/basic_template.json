@@ -1,0 +1,40 @@
+{
+  "builders": [{
+    "type": "amazon-ebs",
+    "subnet_id": "{{user `aws_subnet_id`}}",
+    "vpc_id": "{{user `aws_vpc_id`}}",
+    "region": "{{user `aws_region`}}",
+    "security_group_id": "{{user `security_group_id`}}",
+    "ssh_keypair_name": "ansible-packer",
+    "ssh_username": "ec2-user",
+    "ssh_private_key_file": "ansible-packer.pem",
+    "ssh_pty": "false",
+    "ssh_interface": "private_ip",
+    "instance_type": "t2.micro",
+    "source_ami": "{{user `aws_source_ami`}}",
+    "ami_name": "{{user `aws_target_ami`}}",
+    "associate_public_ip_address": "true",
+    "tags": {"service": "{{user `service`}}"},
+    "run_tags": {
+        "Name": "{{user `ec2-name`}}",
+        "Cost-Center": "awskrug"
+    },
+    "ami_block_device_mappings": [
+      {
+        "device_name": "/dev/sda1",
+        "delete_on_termination": "true",
+        "volume_type": "gp2"
+      }
+    ]
+  }],
+ "provisioners": [{
+   "type": "ansible",
+   "playbook_file": "/home/ec2-user/playbook/httpd.yml",
+   "user": "ec2-user",
+   "sftp_command": "/usr/libexec/openssh/sftp-server",
+   "extra_arguments": [
+     "--extra-vars",
+     "service={{user `service`}}"
+   ]
+ }]
+}

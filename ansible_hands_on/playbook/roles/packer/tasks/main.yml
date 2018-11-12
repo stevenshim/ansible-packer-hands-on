@@ -1,0 +1,15 @@
+---
+- name: download packer binary
+  get_url:
+    url: https://releases.hashicorp.com/packer/1.3.2/packer_1.3.2_linux_amd64.zip
+    dest: /home/ec2-user/packer.zip
+    mode: 0644
+
+- name: unzip packer binary
+  unarchive:
+    src: /home/ec2-user/packer.zip
+    dest: /usr/bin/
+    remote_src: yes
+    mode: 0755
+  become: yes
+  become_user: root 

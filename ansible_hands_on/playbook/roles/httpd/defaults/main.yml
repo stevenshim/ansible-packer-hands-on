@@ -1,0 +1,3 @@
+---
+service: awskrug
+http_port: 10080

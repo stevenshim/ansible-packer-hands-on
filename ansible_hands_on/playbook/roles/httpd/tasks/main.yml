@@ -1,0 +1,43 @@
+---
+- name: install httpd
+  yum: name={{ item.package }}
+  loop:
+  - { package: httpd }
+  - { package: mod_ssl }
+
+- name: create apache document root directory
+  file:
+    path: "/data/apache/{{ service }}/docroot"
+    state: directory
+    owner: apache
+    group: apache
+    mode: 0755
+    recurse: yes
+
+- name: copy apache virtual host configuration
+  template:
+    src: "http-{{ service }}-vhost.conf.j2"
+    dest: /etc/httpd/conf.d/http-vhost.conf
+    owner: apache
+    group: apache
+    mode: 0644
+  notify:
+  - restart apache webserver
+
+- meta: flush_handlers
+
+- name: change apache default listening port configuration
+  lineinfile:
+    dest: /etc/httpd/conf/httpd.conf
+    regexp: "^Listen"
+    line: "Listen {{ http_port }}"
+
+
+- name: create apache log directory
+  file:
+    path: "/log/apache/{{ service }}/"
+    state: directory
+    owner: apache
+    group: apache
+    mode: 0755
+    recurse: yes

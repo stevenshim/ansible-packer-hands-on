@@ -7,7 +7,7 @@
 
 - name: create apache document root directory
   file:
-    path: "/data/apache/{{ service }}/docroot"
+    path: "/data/web/{{ service }}/docroot"
     state: directory
     owner: apache
     group: apache

@@ -7,7 +7,7 @@
 
 - name: create apache document root directory
   file:
-    path: "/data/apache/{{ service }}/docroot"
+    path: "/data/web/{{ service }}/docroot"
     state: directory
     owner: apache
     group: apache
@@ -23,8 +23,6 @@
     mode: 0644
   notify:
   - restart apache webserver
-
-- meta: flush_handlers
 
 - name: change apache default listening port configuration
   lineinfile:

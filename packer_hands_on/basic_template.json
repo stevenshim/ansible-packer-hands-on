@@ -23,13 +23,14 @@
       {
         "device_name": "/dev/sda1",
         "delete_on_termination": "true",
-        "volume_type": "gp2"
+        "volume_type": "gp2",
+	"volume_size": "8"
       }
     ]
   }],
  "provisioners": [{
    "type": "ansible",
-   "playbook_file": "/home/ec2-user/playbook/httpd.yml",
+   "playbook_file": "/home/ec2-user/ansible-packer-hands-on/ansible_hands_on/playbook/httpd.yml",
    "user": "ec2-user",
    "sftp_command": "/usr/libexec/openssh/sftp-server",
    "extra_arguments": [

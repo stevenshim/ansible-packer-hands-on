@@ -6,4 +6,6 @@
   "aws_target_ami": "my-first-ami",
   "service": "awskrug",
   "ec2-name": "now-baking"
+  "ssh_key": "ansible-hands-on"
+  "ssh_key_pem": "/home/ec2-user/.ssh/ansible-hands-on.pem"
 }

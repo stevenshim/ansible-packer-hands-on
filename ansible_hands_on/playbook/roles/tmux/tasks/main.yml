@@ -1,0 +1,10 @@
+---
+- name: install tmux
+  yum: name={{ item.package }}
+  loop:
+  - { package: tmux }
+
+- name: set tmux config
+  copy:
+    src: tmux.conf
+    dest: "/home/ec2-user/.tmux.conf"

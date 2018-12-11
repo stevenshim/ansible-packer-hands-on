@@ -445,7 +445,10 @@ packer를 수행할 폴더에서 template file을 생성한다.
 }
 ```
 ### variable file 작성
-template에 변수 처리 할 내용을 variable로 작성할 수 있다.
+template에 변수 처리 할 내용을 variable로 작성할 수 있습니다.
+<br>
+여기서 변수 값은 여러분들이 생성하신 vpc 및 subnet 등의 정보롤 대체하시면 됩니다.
+
 
 ##### packer_hands_on/var-file.json
 ```json
@@ -460,6 +463,23 @@ template에 변수 처리 할 내용을 variable로 작성할 수 있다.
 }
 ```
 
+### packer 스크립트를 수행할 ec2에 권한 주기
+packer 를 수행할 서버는 ec2 및 ami등 새로 생성할 수 있는 권한이 필요합니다. <br>
+AWS Console 에서 IAM으로 이동하여 ec2 role을 생성합니다.
+
+IAM > Roles > Create Role 로 이동합니다. <br>
+* EC2 가 사용할 Role로 지정 후 다음으로 넘어갑니다.
+* Attach permissions policies 에서 편의상 AmazonEC2FullAccess 를 선택하고 다음으로 넘어갑니다.
+* Tag 지정은 무시하고 넘어갑니다.
+* Role Name에는 packer-role 로 지정합니다.
+* EC2 콘솔로 이동하여 ansible-packer 용 EC2에 조금 전에 생성한 role을 부여합니다.
+
+
+### Packer 를 이용해 AMI를 생성합니다.
+
+```bash
+$ packer build -var-file=var_file.json basic_template.json
+```
 
 
 
